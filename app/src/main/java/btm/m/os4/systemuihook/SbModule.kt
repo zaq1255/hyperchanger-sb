@@ -15,9 +15,9 @@ class SbModule : XposedModule() {
             readInstanceField = ::readInstanceField,
             readInheritedField = ::readInheritedField,
             systemUiPackageName = SYSTEM_UI,
-            keepThemeKey = KEY_KEEP_SOFT_GLASS_AFTER_GLOBAL_THEME,
-            hideClockTextKey = KEY_HIDE_STATUS_BAR_CLOCK_TEXT,
-            mobileNetworkTypeModeKey = KEY_MOBILE_NETWORK_TYPE_MODE,
+            keepThemeKey = "keep_soft_glass_after_global_theme",
+            hideClockTextKey = "hide_status_bar_clock_text",
+            mobileNetworkTypeModeKey = "mobile_network_type_mode",
             stackedMobileDualContainerId = View.generateViewId(),
             logTag = TAG,
             applicationContext = { null },
@@ -28,10 +28,6 @@ class SbModule : XposedModule() {
         if (param.packageName != SYSTEM_UI) return
         runCatching {
             val prefs = getRemotePreferences(REMOTE_PREFERENCE_GROUP)
-            val e = prefs.edit()
-            if (!prefs.contains(KEY_STACKED_MOBILE_SIGNAL_ENABLED)) e.putBoolean(KEY_STACKED_MOBILE_SIGNAL_ENABLED, true)
-            if (!prefs.contains(KEY_MOBILE_NETWORK_TYPE_MODE)) e.putInt(KEY_MOBILE_NETWORK_TYPE_MODE, 1)
-            e.apply()
             statusBarHooks.installAdjustmentHooks(param.defaultClassLoader, prefs)
             statusBarHooks.installStackedMobileSignalHooks(param.defaultClassLoader, prefs)
         }.onFailure { HookModuleLogger.log(this, android.util.Log.ERROR, TAG, "install failed", it) }
@@ -61,8 +57,5 @@ class SbModule : XposedModule() {
     companion object {
         private const val SYSTEM_UI = "com.android.systemui"
         private const val TAG = "HyperChangerSB"
-        private const val KEY_KEEP_SOFT_GLASS_AFTER_GLOBAL_THEME = "keep_soft_glass_after_global_theme"
-        private const val KEY_HIDE_STATUS_BAR_CLOCK_TEXT = "hide_status_bar_clock_text"
-        private const val KEY_MOBILE_NETWORK_TYPE_MODE = "mobile_network_type_mode"
     }
 }
