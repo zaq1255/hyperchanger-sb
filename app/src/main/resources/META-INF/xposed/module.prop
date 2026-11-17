@@ -1,0 +1,4 @@
+minApiVersion=102
+targetApiVersion=102
+staticScope=true
+description=Status-bar signal customization (subset of HyperChanger)
