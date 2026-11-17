@@ -61,5 +61,8 @@ class SbModule : XposedModule() {
     companion object {
         private const val SYSTEM_UI = "com.android.systemui"
         private const val TAG = "HyperChangerSB"
+        private const val KEY_KEEP_SOFT_GLASS_AFTER_GLOBAL_THEME = "keep_soft_glass_after_global_theme"
+        private const val KEY_HIDE_STATUS_BAR_CLOCK_TEXT = "hide_status_bar_clock_text"
+        private const val KEY_MOBILE_NETWORK_TYPE_MODE = "mobile_network_type_mode"
     }
 }
