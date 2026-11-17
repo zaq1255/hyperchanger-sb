@@ -11,7 +11,13 @@ jobs:
           java-version: '21'
           distribution: temurin
           cache: gradle
-      - uses: android-actions/setup-android@v3
+      - name: Android SDK prep
+        run: |
+          SDK=/usr/local/lib/android/sdk
+          echo "ANDROID_HOME=$SDK" >> $GITHUB_ENV
+          echo "ANDROID_SDK_ROOT=$SDK" >> $GITHUB_ENV
+          echo "sdk.dir=$SDK" > local.properties
+          yes | "$SDK/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null 2>&1 || true
       - name: Build
         run: |
           chmod +x gradlew
