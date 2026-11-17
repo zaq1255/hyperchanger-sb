@@ -1,41 +1,23 @@
-// AUTO-GENERATED from upstream HyperChanger (AGPL-3.0-or-later)
+// AUTO-GENERATED constants (subset of upstream HyperChanger, AGPL-3.0-or-later)
 package btm.m.os4.systemuihook
 
-internal const val KEY_CONTROL_CENTER_BATTERY_PERCENT_MODE = "control_center_battery_percent_mode"
-internal const val KEY_HIDE_STATUS_BAR_CLOCK_TEXT = "hide_status_bar_clock_text"
-internal const val KEY_KEEP_SOFT_GLASS_AFTER_GLOBAL_THEME = "keep_soft_glass_after_global_theme"
+internal const val SYSTEM_UI_RESOURCE_SCOPE_STATUS_BAR = 1
+internal const val SYSTEM_UI_RESOURCE_SCOPE_CONTROL_CENTER = 2
+internal const val SYSTEM_UI_RESOURCE_SCOPE_ALL = SYSTEM_UI_RESOURCE_SCOPE_STATUS_BAR or SYSTEM_UI_RESOURCE_SCOPE_CONTROL_CENTER
+
 internal const val KEY_MOBILE_NETWORK_TYPE_LEFT_MARGIN = "mobile_network_type_left_margin"
-internal const val KEY_MOBILE_NETWORK_TYPE_MODE = "mobile_network_type_mode"
-internal const val KEY_MOBILE_NETWORK_TYPE_POSITION = "mobile_network_type_position"
 internal const val KEY_MOBILE_NETWORK_TYPE_RIGHT_MARGIN = "mobile_network_type_right_margin"
 internal const val KEY_MOBILE_NETWORK_TYPE_SCALE = "mobile_network_type_scale"
 internal const val KEY_MOBILE_NETWORK_TYPE_VERTICAL_OFFSET = "mobile_network_type_vertical_offset"
 internal const val KEY_MOBILE_SIGNAL_HIDE_MODE = "mobile_signal_hide_mode"
-internal const val KEY_STACKED_MOBILE_CORNER_ENABLED = "stacked_mobile_corner_enabled"
-internal const val KEY_STACKED_MOBILE_CORNER_RADIUS = "stacked_mobile_corner_radius_dp"
 internal const val KEY_STACKED_MOBILE_SIGNAL_ENABLED = "stacked_mobile_signal_enabled"
 internal const val KEY_STACKED_MOBILE_SIGNAL_LEFT_MARGIN = "stacked_mobile_signal_left_margin"
 internal const val KEY_STACKED_MOBILE_SIGNAL_RIGHT_MARGIN = "stacked_mobile_signal_right_margin"
 internal const val KEY_STACKED_MOBILE_SIGNAL_SCALE = "stacked_mobile_signal_scale"
 internal const val KEY_STACKED_MOBILE_SIGNAL_VERTICAL_OFFSET = "stacked_mobile_signal_vertical_offset"
-internal const val KEY_STATUS_BAR_BATTERY_PERCENT_MODE = "status_bar_battery_percent_mode"
 internal const val KEY_STATUS_BAR_ICONS_LEFT_MASK = "status_bar_icons_left_mask"
 internal const val KEY_STATUS_BAR_ICON_IMPORT_ENABLED = "status_bar_icon_import_enabled"
 internal const val KEY_STATUS_BAR_ICON_IMPORT_REVISION = "status_bar_icon_import_revision"
-internal const val KEY_STATUS_BAR_ICON_SIZE_PERCENT = "status_bar_icon_size_percent"
-internal const val KEY_STATUS_BAR_ICON_SPACING_PERCENT = "status_bar_icon_spacing_percent"
-internal const val KEY_STATUS_BAR_SECONDS_DURATION = "status_bar_seconds_duration_seconds"
-internal const val KEY_STATUS_BAR_SECONDS_MODE = "status_bar_seconds_mode"
 internal const val KEY_SYSTEM_UI_RESOURCE_IMPORT_SCOPE = "system_ui_resource_import_scope"
-internal const val MAX_ARCHIVE_BYTES = 128 * 1024 * 1024
-internal const val MAX_ENTRY_BYTES = 24 * 1024 * 1024
 internal const val REMOTE_PREFERENCE_GROUP = "hyper_system_ui_hook"
-internal const val STATUS_BAR_CLOCK_ID = 2131427965
-internal const val STATUS_BAR_ICON_SIZE_PERCENT_DEFAULT = 0f
-internal const val STATUS_BAR_SECONDS_DEFAULT_DURATION = 30
-internal const val STATUS_BAR_SECONDS_MODE_ALWAYS = 1
-internal const val STATUS_BAR_SECONDS_MODE_HIDDEN = 0
-internal const val STATUS_BAR_SECONDS_MODE_LONG_PRESS = 2
-internal const val SYSTEM_UI_RESOURCE_SCOPE_ALL = SYSTEM_UI_RESOURCE_SCOPE_STATUS_BAR or SYSTEM_UI_RESOURCE_SCOPE_CONTROL_CENTER
-internal const val SYSTEM_UI_RESOURCE_SCOPE_CONTROL_CENTER = 2
-internal const val SYSTEM_UI_RESOURCE_SCOPE_STATUS_BAR = 1
+internal const val STATUS_BAR_ICON_AUTHORITY = "btm.m.os4.systemuihook.statusbaricons"
