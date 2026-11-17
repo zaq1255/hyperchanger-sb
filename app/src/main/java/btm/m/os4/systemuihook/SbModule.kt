@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 package btm.m.os4.systemuihook
 
+import android.util.Log
 import android.view.View
+import io.github.libxposed.api.XposedInterface.ExceptionMode
 import io.github.libxposed.api.XposedModule
 import io.github.libxposed.api.XposedModuleInterface.PackageLoadedParam
 import java.lang.reflect.Executable
 
-/** Minimal module: only installs the status-bar (signal / network-type / icon) hooks. */
+/** Minimal module: status-bar hooks (systemui) + hide AI-call button (incallui). */
 class SbModule : XposedModule() {
     private val statusBarHooks by lazy {
         StatusBarHooks(
@@ -25,12 +27,35 @@ class SbModule : XposedModule() {
     }
 
     override fun onPackageLoaded(param: PackageLoadedParam) {
-        if (param.packageName != SYSTEM_UI) return
+        when (param.packageName) {
+            SYSTEM_UI -> installStatusBarHooks(param)
+            INCALLUI -> installAiCallHooks(param.defaultClassLoader)
+        }
+    }
+
+    private fun installStatusBarHooks(param: PackageLoadedParam) {
         runCatching {
             val prefs = getRemotePreferences(REMOTE_PREFERENCE_GROUP)
             statusBarHooks.installAdjustmentHooks(param.defaultClassLoader, prefs)
             statusBarHooks.installStackedMobileSignalHooks(param.defaultClassLoader, prefs)
-        }.onFailure { HookModuleLogger.log(this, android.util.Log.ERROR, TAG, "install failed", it) }
+        }.onFailure { HookModuleLogger.log(this, Log.ERROR, TAG, "install status-bar failed", it) }
+    }
+
+    /** Hide the Xiaomi AI-call (AI接听) button so it can't be mis-tapped while answering. */
+    private fun installAiCallHooks(cl: ClassLoader) {
+        runCatching {
+            val utils = cl.loadClass("com.android.incallui.aiassistant.AiAssistantUtils")
+            val m = utils.getDeclaredMethod("supportXiaoAiAutoAnswer", android.content.Context::class.java)
+            hookDeoptimized(m).setExceptionMode(ExceptionMode.PROTECTIVE)
+                .setId("incallui:no-ai-auto-answer").intercept { false }
+            HookModuleLogger.log(this, Log.INFO, TAG, "AI-call auto-answer disabled")
+        }.onFailure { HookModuleLogger.log(this, Log.WARN, TAG, "hook supportXiaoAiAutoAnswer failed", it) }
+        runCatching {
+            val frag = cl.loadClass("com.android.incallui.CallCardFragment")
+            val m2 = frag.getDeclaredMethod("showAiAssistant")
+            hookDeoptimized(m2).setId("incallui:hide-ai-button").intercept { null }
+            HookModuleLogger.log(this, Log.INFO, TAG, "AI-call button hidden")
+        }.onFailure { HookModuleLogger.log(this, Log.WARN, TAG, "hook showAiAssistant failed", it) }
     }
 
     internal fun hookDeoptimized(member: Executable) = runCatching { deoptimize(member) }.let { hook(member) }
@@ -56,6 +81,7 @@ class SbModule : XposedModule() {
 
     companion object {
         private const val SYSTEM_UI = "com.android.systemui"
+        private const val INCALLUI = "com.android.incallui"
         private const val TAG = "HyperChangerSB"
     }
 }
