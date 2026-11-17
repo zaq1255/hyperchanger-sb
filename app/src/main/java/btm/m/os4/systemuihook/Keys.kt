@@ -21,3 +21,6 @@ internal const val KEY_STATUS_BAR_ICON_IMPORT_REVISION = "status_bar_icon_import
 internal const val KEY_SYSTEM_UI_RESOURCE_IMPORT_SCOPE = "system_ui_resource_import_scope"
 internal const val REMOTE_PREFERENCE_GROUP = "hyper_system_ui_hook"
 internal const val STATUS_BAR_ICON_AUTHORITY = "btm.m.os4.systemuihook.statusbaricons"
+
+internal const val KEY_MOBILE_NETWORK_TYPE_MODE = "mobile_network_type_mode"
+internal const val KEY_MOBILE_NETWORK_TYPE_BOLD = "mobile_network_type_bold"
