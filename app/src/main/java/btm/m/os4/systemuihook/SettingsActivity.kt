@@ -30,12 +30,12 @@ class SettingsActivity : Activity() {
         }
         val title = TextView(this).apply {
             text = "SBOnly · 状态栏"
-            textSize = 20f
+            setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 20f)
             setTextColor(Color.WHITE)
         }
         root.addView(title)
         status = TextView(this).apply {
-            textSize = 13f
+            setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 13f)
             setTextColor(Color.parseColor("#9AA0A6"))
             setPadding(0, dp(6), 0, dp(14))
             text = connStatus()
@@ -66,7 +66,7 @@ class SettingsActivity : Activity() {
         si("图标间距 %", KEY_STATUS_BAR_ICON_SPACING_PERCENT, -100, 100, 0)
         val hint = TextView(this).apply {
             text = "改完回到系统界面/重启系统界面生效。"
-            textSize = 12f
+            setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 12f)
             setTextColor(Color.parseColor("#9AA0A6"))
             setPadding(0, dp(20), 0, 0)
         }
@@ -81,7 +81,7 @@ class SettingsActivity : Activity() {
     private fun refreshStatus() { status?.text = connStatus() }
 
     private fun label(t: String): TextView = TextView(this).apply {
-        text = t; textSize = 15f; setTextColor(Color.parseColor("#8AB4F8")); setPadding(0, dp(18), 0, dp(6))
+        text = t; setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 15f); setTextColor(Color.parseColor("#8AB4F8")); setPadding(0, dp(18), 0, dp(6))
     }
 
     private fun sw(text: String, key: String, def: Boolean) {
@@ -99,7 +99,7 @@ class SettingsActivity : Activity() {
         val cur = sp.getFloat(key, def).coerceIn(min, max)
         val steps = ((max - min) / step).roundToInt()
         val prog = ((cur - min) / step).roundToInt().coerceIn(0, steps)
-        val tv = TextView(this).apply { text = "$text：${fmt(cur)}"; setTextColor(Color.WHITE); textSize = 14f; setPadding(0, dp(10), 0, 0) }
+        val tv = TextView(this).apply { text = "$text：${fmt(cur)}"; setTextColor(Color.WHITE); setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f); setPadding(0, dp(10), 0, 0) }
         (findRoot()).addView(tv)
         val sb = SeekBar(this).apply {
             this.max = steps; progress = prog
@@ -119,7 +119,7 @@ class SettingsActivity : Activity() {
     private fun si(text: String, key: String, min: Int, max: Int, def: Int) {
         val sp = prefs()
         val cur = sp.getInt(key, def).coerceIn(min, max)
-        val tv = TextView(this).apply { text = "$text：$cur"; setTextColor(Color.WHITE); textSize = 14f; setPadding(0, dp(10), 0, 0) }
+        val tv = TextView(this).apply { text = "$text：$cur"; setTextColor(Color.WHITE); setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f); setPadding(0, dp(10), 0, 0) }
         (findRoot()).addView(tv)
         val sb = SeekBar(this).apply {
             this.max = (max - min); progress = cur - min
