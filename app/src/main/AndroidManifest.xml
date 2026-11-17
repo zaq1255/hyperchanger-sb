@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:label="SBOnly" android:hasCode="true" />
+    <application
+        android:name=".SbApp"
+        android:label="SBOnly"
+        android:hasCode="true"
+        android:allowBackup="false">
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="SBOnly 状态栏">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>
